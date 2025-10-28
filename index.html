@@ -11,46 +11,74 @@
     />
     <script src="./script.js" defer></script>
   </head>
+
   <body>
     <div id="clockdate">
       <div class="clockdate-wrapper">
         <div id="clock"></div>
+
         <div id="date"></div>
       </div>
     </div>
-
+    <div id="alert-message"></div>
     <div class="tools-wrapper">
       <div id="timer-container">
         <h2><u>Minuteur</u></h2>
+
         <input
           type="text"
           id="timer-input"
           value="00:05:00"
           placeholder="HH:MM:SS"
         />
+
         <div id="timer-display">00:05:00</div>
       </div>
 
       <div id="stopwatch-container">
         <h2><u>Chronomètre</u></h2>
+
         <div id="stopwatch-display">00:00:00</div>
       </div>
 
       <div id="alarms-list-container">
-        <h2><u>Alarmes Définies</u></h2>
-        <ul id="alarms-list"></ul>
+        <h2><u>Alarmes</u></h2>
+
+        <h3>⏰ Alarmes à venir</h3>
+
+        <ul id="upcoming-alarms-list"></ul>
+
+        <h3>✅ Alarmes passées</h3>
+
+        <ul id="passed-alarms-list"></ul>
       </div>
     </div>
 
     <div class="btn-wrapper">
-      <div class="flex">
+      <div class="alarm-definition-group">
+        <input
+          type="text"
+          id="alarm-time-input"
+          value="08:00"
+          placeholder="HH:MM"
+        />
+
+        <input
+          type="text"
+          id="alarm-message-input"
+          placeholder="Message de l'alarme (obligatoire)"
+        />
+
         <button id="set-alarm-btn">
           <i class="fa fa-bell"></i> Définir une alarme
         </button>
+      </div>
 
+      <div class="flex">
         <button id="toggle-stopwatch-btn">
           <i class="fa fa-clock-o"></i> Lancer le chrono
         </button>
+
         <button id="reset-stopwatch-btn">
           <i class="fa fa-undo"></i> Reset chrono
         </button>
@@ -58,6 +86,7 @@
         <button id="toggle-timer-btn">
           <i class="fa fa-play"></i> Démarrer Minuteur
         </button>
+
         <button id="reset-timer-btn">
           <i class="fa fa-refresh"></i> Reset Minuteur
         </button>
