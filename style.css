@@ -36,3 +36,13 @@ body {
   font-family: arial, sans-serif;
   color: #fff;
 }
+
+.btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
+.flex {
+  display: flex;
+  gap: 12px;
+}
