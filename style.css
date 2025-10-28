@@ -52,6 +52,7 @@ button {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   padding: 4px;
   border: none;
+  cursor: pointer;
 }
 
 button:hover {
