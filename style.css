@@ -46,3 +46,15 @@ body {
   display: flex;
   gap: 12px;
 }
+button {
+  background-color: black;
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 4px;
+  border: none;
+}
+
+button:hover {
+  background-color: rgb(205, 205, 205);
+  color: red;
+}
