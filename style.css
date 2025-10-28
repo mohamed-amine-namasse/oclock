@@ -1,14 +1,9 @@
 body {
   background-color: goldenrod;
-
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
   margin: 0;
-
   padding-top: 50px; /* Ajoute un peu de padding en haut pour les petits écrans */
 }
 
@@ -16,59 +11,40 @@ body {
 
 #clockdate {
   margin-top: 0; /* On utilise padding-top du body */
-
   margin-bottom: 20px;
 }
 
 .clockdate-wrapper {
   background-color: #333;
-
   padding: 25px;
-
   max-width: 350px;
-
   width: 100%;
-
   text-align: center;
-
   border-radius: 5px;
-
   margin: 0 auto;
 }
 
 #clock {
   background-color: #333;
-
   font-family: sans-serif;
-
   font-size: 60px;
-
   text-shadow: 0px 0px 1px #fff;
-
   color: #fff;
 }
 
 #clock span {
   color: #888;
-
   text-shadow: 0px 0px 1px #333;
-
   font-size: 50px;
-
   position: relative;
-
   top: -5px;
-
   left: 10px;
 }
 
 #date {
   letter-spacing: 3px;
-
   font-size: 14px;
-
   font-family: arial, sans-serif;
-
   color: #fff;
 }
 
@@ -78,13 +54,9 @@ body {
 
 .tools-wrapper {
   display: flex;
-
   justify-content: center;
-
   gap: 20px;
-
   flex-wrap: wrap; /* Permet aux éléments de passer à la ligne sur petits écrans */
-
   margin-bottom: 20px;
 }
 
@@ -92,17 +64,11 @@ body {
 #stopwatch-container,
 #alarms-list-container {
   background-color: #555;
-
   color: white;
-
   padding: 15px;
-
   width: 280px; /* Taille fixe pour tous les outils */
-
   text-align: center;
-
   border-radius: 5px;
-
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -110,7 +76,6 @@ body {
 #stopwatch-container h2 u,
 #alarms-list-container h2 u {
   text-decoration-color: goldenrod;
-
   text-decoration-thickness: 2px;
 }
 
@@ -118,34 +83,22 @@ body {
 
 #timer-input {
   width: 70%;
-
   padding: 8px;
-
   margin-bottom: 15px;
-
   text-align: center;
-
   font-size: 1.1em;
-
   border: 1px solid goldenrod;
-
   background-color: #333;
-
   color: white;
-
   border-radius: 3px;
 }
 
 #timer-display,
 #stopwatch-display {
   font-size: 2.5em; /* Taille légèrement réduite pour un meilleur affichage */
-
   font-weight: bold;
-
   color: #fff;
-
   text-shadow: 0px 0px 2px #ff0;
-
   margin: 10px 0;
 }
 
@@ -153,45 +106,31 @@ body {
 
 .btn-wrapper {
   width: 90%;
-
   max-width: 900px;
-
   margin-bottom: 20px;
 }
 
 .flex {
   display: flex;
-
   justify-content: center;
-
   gap: 12px;
-
   flex-wrap: wrap; /* Pour que les boutons passent à la ligne */
 }
 
 button {
   background-color: black;
-
   color: white;
-
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-
   padding: 8px 12px;
-
   border: none;
-
   cursor: pointer;
-
   border-radius: 3px;
-
   transition: background-color 0.2s, color 0.2s;
-
   font-size: 0.9em;
 }
 
 button:hover {
   background-color: rgb(205, 205, 205);
-
   color: red;
 }
 
@@ -203,33 +142,21 @@ button:hover {
 
 .alarm-definition-group {
   display: flex;
-
   justify-content: center;
-
   gap: 10px;
-
   margin: 0 auto;
-
   margin-bottom: 15px;
-
   width: 90%;
-
   max-width: 600px;
 }
 
 .alarm-definition-group input {
   padding: 8px;
-
   border: 1px solid goldenrod;
-
   background-color: #333;
-
   color: white;
-
   border-radius: 3px;
-
   font-size: 1em;
-
   width: auto;
 }
 
@@ -237,13 +164,9 @@ button:hover {
 
 #alarms-list-container h3 {
   color: goldenrod;
-
   font-size: 1.1em;
-
   margin: 10px 0 5px 0;
-
   text-align: left;
-
   padding-left: 5px;
 }
 
@@ -252,26 +175,18 @@ button:hover {
 #upcoming-alarms-list,
 #passed-alarms-list {
   list-style: none;
-
   padding: 0;
-
   text-align: left;
-
   margin-bottom: 20px;
 }
 
 #upcoming-alarms-list li,
 #passed-alarms-list li {
   display: flex;
-
   justify-content: space-between;
-
   align-items: center;
-
   padding: 8px 0;
-
   border-bottom: 1px dashed #777;
-
   font-size: 1em;
 }
 
@@ -279,49 +194,37 @@ button:hover {
 
 .alarm-msg {
   font-style: italic;
-
   font-size: 0.9em;
-
   color: #bbb;
 }
 
 .alarm-controls {
   display: flex;
-
   align-items: center;
-
   gap: 10px;
 }
 
 .alarm-time-status {
   font-weight: bold;
-
   font-size: 0.85em;
-
   padding: 3px 6px;
-
   border-radius: 3px;
 }
 
 .status-upcoming {
   color: #198754; /* Vert foncé */
-
   background-color: #d1e7dd; /* Fond vert clair */
 }
 
 .status-passed {
   color: #dc3545; /* Rouge */
-
   background-color: #f8d7da; /* Fond rouge clair */
 }
 
 .delete-alarm-btn {
   background-color: #dc3545 !important;
-
   color: white !important;
-
   padding: 3px 8px !important;
-
   font-size: 0.75em !important;
 }
 
@@ -333,25 +236,15 @@ button:hover {
   /* 1. Apparence et positionnement */
 
   text-align: center;
-
   padding: 15px;
-
   margin: 15px auto; /* Centre l'élément au-dessus de l'horloge */
-
   width: 90%;
-
   max-width: 500px; /* Limite la largeur pour ne pas prendre tout l'écran */
-
   background-color: #ffdddd; /* Couleur de fond pour l'alerte (Rouge clair) */
-
   color: #cc0000; /* Couleur du texte (Rouge foncé) */
-
   border: 2px solid #ffaaaa;
-
   border-radius: 8px;
-
   font-weight: bold;
-
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
   /* 2. Gestion de la visibilité et des transitions */
@@ -359,15 +252,12 @@ button:hover {
   /* Par défaut : caché */
 
   opacity: 0;
-
   visibility: hidden; /* Assure que l'élément n'est pas cliquable lorsqu'il est invisible */
 
   /* Ajoute une transition pour un effet de fondu (fade) en 0.5 seconde */
 
   /* La transition de 'visibility' est retardée (0.5s) pour s'assurer qu'elle n'est appliquée qu'après que 'opacity' soit à 0 */
-
   transition: opacity 0.5s ease-in-out, visibility 0s 0.5s;
-
   z-index: 1000; /* Assure qu'il est au-dessus des autres éléments */
 }
 
@@ -375,8 +265,6 @@ button:hover {
 
 #alert-message[style*="opacity: 1"] {
   /* Lorsque le JS met l'opacité à 1, on veut que la visibilité soit immédiate (0s) */
-
   transition: opacity 0.5s ease-in-out, visibility 0s 0s;
-
   visibility: visible !important;
 }
