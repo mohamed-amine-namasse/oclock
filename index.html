@@ -18,30 +18,48 @@
         <div id="date"></div>
       </div>
     </div>
-    <div class="flex">
-      <div class="btn">
-        <div id="stopwatch-container">
-          <h2><u>Chronomètre</u></h2>
-          <div id="stopwatch-display">00:00:00</div>
-        </div>
 
-        <div id="alarms-list-container">
-          <h2><u>Alarmes Définies</u></h2>
-          <ul id="alarms-list"></ul>
-        </div>
+    <div class="tools-wrapper">
+      <div id="timer-container">
+        <h2><u>Minuteur</u></h2>
+        <input
+          type="text"
+          id="timer-input"
+          value="00:05:00"
+          placeholder="HH:MM:SS"
+        />
+        <div id="timer-display">00:05:00</div>
+      </div>
+
+      <div id="stopwatch-container">
+        <h2><u>Chronomètre</u></h2>
+        <div id="stopwatch-display">00:00:00</div>
+      </div>
+
+      <div id="alarms-list-container">
+        <h2><u>Alarmes Définies</u></h2>
+        <ul id="alarms-list"></ul>
       </div>
     </div>
 
-    <div class="flex">
-      <div class="btn">
+    <div class="btn-wrapper">
+      <div class="flex">
         <button id="set-alarm-btn">
           <i class="fa fa-bell"></i> Définir une alarme
         </button>
+
         <button id="toggle-stopwatch-btn">
           <i class="fa fa-clock-o"></i> Lancer le chrono
         </button>
         <button id="reset-stopwatch-btn">
           <i class="fa fa-undo"></i> Reset chrono
+        </button>
+
+        <button id="toggle-timer-btn">
+          <i class="fa fa-play"></i> Démarrer Minuteur
+        </button>
+        <button id="reset-timer-btn">
+          <i class="fa fa-refresh"></i> Reset Minuteur
         </button>
       </div>
     </div>

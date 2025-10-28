@@ -1,5 +1,5 @@
 // ===================================
-// PARTIE 1 : Horloge actuelle (Votre code existant)
+// PARTIE 1 : Horloge actuelle (Votre code de base)
 // ===================================
 
 function startTime() {
@@ -7,10 +7,7 @@ function startTime() {
   var hr = today.getHours();
   var min = today.getMinutes();
   var sec = today.getSeconds();
-  // Modification : 'ap' n'est pas utilisé dans le format 24h,
-  // mais je le garde car il était dans votre code (format 12h)
   var ap = hr < 12 ? "<span>AM</span>" : "<span>PM</span>";
-  // Conversion en format 12h
   hr = hr == 0 ? 12 : hr;
   hr = hr > 12 ? hr - 12 : hr;
 
@@ -42,9 +39,6 @@ function startTime() {
   var curYear = today.getFullYear();
   var date = curWeekDay + ", " + curDay + " " + curMonth + " " + curYear;
   document.getElementById("date").innerHTML = date;
-
-  // Utilisation de setInterval au lieu de setTimeout récursif
-  // var time = setTimeout(function () { startTime(); }, 500);
 }
 
 function checkTime(i) {
@@ -58,16 +52,8 @@ function checkTime(i) {
 setInterval(startTime, 500);
 
 // ===================================
-// PARTIE 2 : Fonctionnalité du Chronomètre
+// FONCTION UTILITAIRE (Chrono/Minuteur)
 // ===================================
-
-const stopwatchDisplay = document.getElementById("stopwatch-display");
-const toggleStopwatchBtn = document.getElementById("toggle-stopwatch-btn");
-
-let stopwatchInterval;
-let startTimeValue;
-let elapsedTime = 0; // Le temps écoulé en millisecondes
-let isRunning = false;
 
 // Formate les millisecondes en HH:MM:SS
 function formatTime(ms) {
@@ -85,25 +71,41 @@ function formatTime(ms) {
   );
 }
 
-// Met à jour l'affichage du chronomètre
+// Convertit HH:MM:SS en millisecondes pour le minuteur
+function timeToMs(timeStr) {
+  const parts = timeStr.split(":").map(Number);
+  if (parts.length === 3) {
+    return (parts[0] * 3600 + parts[1] * 60 + parts[2]) * 1000;
+  }
+  return 0;
+}
+
+// ===================================
+// PARTIE 2 : Chronomètre
+// ===================================
+
+const stopwatchDisplay = document.getElementById("stopwatch-display");
+const toggleStopwatchBtn = document.getElementById("toggle-stopwatch-btn");
+const resetStopwatchBtn = document.getElementById("reset-stopwatch-btn");
+
+let stopwatchInterval;
+let startTimeValue;
+let elapsedTime = 0;
+let isRunning = false;
+
 function updateStopwatch() {
   elapsedTime = Date.now() - startTimeValue;
   stopwatchDisplay.textContent = formatTime(elapsedTime);
 }
 
-// Gère le démarrage et l'arrêt du chronomètre
 function toggleStopwatch() {
   if (isRunning) {
-    // Arrêter
     clearInterval(stopwatchInterval);
     isRunning = false;
     toggleStopwatchBtn.innerHTML =
       '<i class="fa fa-clock-o"></i> Lancer le chrono';
   } else {
-    // Lancer (ou reprendre)
-    // On reprend à partir du temps écoulé (elapsedTime)
     startTimeValue = Date.now() - elapsedTime;
-    // Met à jour plus fréquemment pour un affichage plus fluide
     stopwatchInterval = setInterval(updateStopwatch, 10);
     isRunning = true;
     toggleStopwatchBtn.innerHTML =
@@ -111,37 +113,105 @@ function toggleStopwatch() {
   }
 }
 
-// Ajout de l'écouteur d'événement au bouton
-toggleStopwatchBtn.addEventListener("click", toggleStopwatch);
-
-// ... (code existant de la partie 2)
-
-const resetStopwatchBtn = document.getElementById("reset-stopwatch-btn");
-
-// ... (fonctions formatTime, updateStopwatch, toggleStopwatch)
-
-//  Fonction de réinitialisation du chronomètre
 function resetStopwatch() {
-  // 1. Arrêter le chronomètre s'il est en cours
   clearInterval(stopwatchInterval);
   isRunning = false;
-
-  // 2. Réinitialiser les variables de temps
   elapsedTime = 0;
-
-  // 3. Mettre à jour l'affichage
   stopwatchDisplay.textContent = "00:00:00";
-
-  // 4. Mettre à jour le texte du bouton Lancer/Arrêter
   toggleStopwatchBtn.innerHTML =
     '<i class="fa fa-clock-o"></i> Lancer le chrono';
 }
 
-// Ajout de l'écouteur d'événement pour le bouton Reset
+toggleStopwatchBtn.addEventListener("click", toggleStopwatch);
 resetStopwatchBtn.addEventListener("click", resetStopwatch);
 
 // ===================================
-// PARTIE 3 : Gestion des Alarmes
+// PARTIE 3 : Minuteur (NOUVELLE FONCTIONNALITÉ)
+// ===================================
+
+const timerInput = document.getElementById("timer-input");
+const timerDisplay = document.getElementById("timer-display");
+const toggleTimerBtn = document.getElementById("toggle-timer-btn");
+const resetTimerBtn = document.getElementById("reset-timer-btn");
+
+let timerInterval;
+let defaultDurationMs = timeToMs(timerInput.value || "00:05:00");
+let durationMs = defaultDurationMs;
+let remainingMs = durationMs;
+let isTimerRunning = false;
+let startTimeTimer;
+
+function updateTimer() {
+  const elapsedSinceStart = Date.now() - startTimeTimer;
+  remainingMs = durationMs - elapsedSinceStart;
+
+  if (remainingMs <= 0) {
+    remainingMs = 0;
+    clearInterval(timerInterval);
+    isTimerRunning = false;
+    timerDisplay.textContent = formatTime(0);
+    toggleTimerBtn.innerHTML = '<i class="fa fa-play"></i> Démarrer Minuteur';
+    timerInput.style.display = "block";
+    alert("TEMPS ÉCOULÉ !");
+    return;
+  }
+
+  timerDisplay.textContent = formatTime(remainingMs);
+}
+
+function toggleTimer() {
+  // 1. Mettre à jour la durée si l'input a changé
+  const newDurationMs = timeToMs(timerInput.value);
+  if (newDurationMs > 0 && newDurationMs !== defaultDurationMs) {
+    defaultDurationMs = newDurationMs;
+    durationMs = newDurationMs;
+    remainingMs = durationMs;
+    timerDisplay.textContent = formatTime(durationMs);
+  }
+
+  if (remainingMs <= 0 && !isTimerRunning) {
+    alert("Veuillez définir un temps supérieur à zéro.");
+    return;
+  }
+
+  if (isTimerRunning) {
+    // Pause
+    clearInterval(timerInterval);
+    isTimerRunning = false;
+    durationMs = remainingMs;
+    toggleTimerBtn.innerHTML = '<i class="fa fa-play"></i> Reprendre Minuteur';
+    timerInput.style.display = "block";
+  } else {
+    // Démarrer/Reprendre
+    startTimeTimer = Date.now() - (defaultDurationMs - remainingMs);
+    timerInterval = setInterval(updateTimer, 10);
+    isTimerRunning = true;
+    toggleTimerBtn.innerHTML = '<i class="fa fa-pause"></i> Pause Minuteur';
+    timerInput.style.display = "none";
+  }
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  isTimerRunning = false;
+
+  // Réinitialise avec la valeur actuelle de l'input
+  const initialMs = timeToMs(timerInput.value);
+  durationMs = initialMs;
+  remainingMs = durationMs;
+
+  timerDisplay.textContent = formatTime(durationMs);
+  toggleTimerBtn.innerHTML = '<i class="fa fa-play"></i> Démarrer Minuteur';
+  timerInput.style.display = "block";
+}
+
+toggleTimerBtn.addEventListener("click", toggleTimer);
+resetTimerBtn.addEventListener("click", resetTimer);
+// Affichage initial
+timerDisplay.textContent = timerInput.value;
+
+// ===================================
+// PARTIE 4 : Alarmes
 // ===================================
 
 const setAlarmBtn = document.getElementById("set-alarm-btn");
@@ -149,28 +219,20 @@ const alarmsList = document.getElementById("alarms-list");
 let alarms = [];
 let alarmCheckInterval;
 
-// Fonction pour ajouter une alarme via un popup
 function setAlarm() {
-  // Ouvre une boîte de dialogue pour saisir l'heure (format HH:MM)
-  // Utiliser le format 24h pour simplifier la comparaison
   const alarmTimeInput = prompt(
     "Entrez l'heure de l'alarme (HH:MM format 24h) :",
     "08:00"
   );
 
   if (alarmTimeInput) {
-    // Vérification simple du format HH:MM
     const timeRegex = /^\d{2}:\d{2}$/;
     if (timeRegex.test(alarmTimeInput)) {
-      const newAlarm = {
-        time: alarmTimeInput,
-        id: Date.now(), // ID unique
-      };
+      const newAlarm = { time: alarmTimeInput, id: Date.now() };
 
       alarms.push(newAlarm);
-      renderAlarms(); // Met à jour l'affichage
+      renderAlarms();
 
-      // S'assure que la vérification des alarmes est lancée
       if (!alarmCheckInterval) {
         startAlarmChecker();
       }
@@ -180,11 +242,9 @@ function setAlarm() {
   }
 }
 
-// Fonction pour afficher la liste des alarmes
 function renderAlarms() {
-  alarmsList.innerHTML = ""; // Vide la liste actuelle
+  alarmsList.innerHTML = "";
 
-  // Si le tableau est vide, affiche un message
   if (alarms.length === 0) {
     alarmsList.innerHTML = "<li>Aucune alarme définie.</li>";
     return;
@@ -197,7 +257,6 @@ function renderAlarms() {
       <button data-id="${alarm.id}" class="delete-alarm-btn">Supprimer</button>
     `;
 
-    // Attache l'événement de suppression
     const deleteBtn = listItem.querySelector(".delete-alarm-btn");
     deleteBtn.addEventListener("click", deleteAlarm);
 
@@ -205,49 +264,35 @@ function renderAlarms() {
   });
 }
 
-// Fonction pour supprimer une alarme
 function deleteAlarm(event) {
-  // Récupère l'ID à partir de l'attribut data-id du bouton cliqué
   const alarmId = parseInt(event.target.dataset.id);
 
-  // Filtre le tableau pour supprimer l'alarme
   alarms = alarms.filter((alarm) => alarm.id !== alarmId);
 
-  renderAlarms(); // Met à jour l'affichage
+  renderAlarms();
 
-  // Arrête la vérification si plus d'alarmes
   if (alarms.length === 0 && alarmCheckInterval) {
     clearInterval(alarmCheckInterval);
     alarmCheckInterval = null;
   }
 }
 
-// Fonction de vérification des alarmes
 function checkAlarms() {
   const now = new Date();
-  // Formate l'heure actuelle en HH:MM (format 24h) pour la comparaison
   const currentTime = `${String(now.getHours()).padStart(2, "0")}:${String(
     now.getMinutes()
   ).padStart(2, "0")}`;
 
   alarms.forEach((alarm) => {
-    // Compare uniquement HH:MM
     if (alarm.time === currentTime && now.getSeconds() < 10) {
-      // La vérification se fait une fois par minute,
-      // on utilise now.getSeconds() < 10 pour s'assurer que l'alerte n'est montrée qu'une seule fois
       alert(`🔔 ALARME : Il est ${alarm.time} !`);
     }
   });
 }
 
-// Démarre la vérification des alarmes toutes les minutes
 function startAlarmChecker() {
-  // Vérification toutes les 60 secondes (60000ms)
   alarmCheckInterval = setInterval(checkAlarms, 60000);
 }
 
-// Événement pour le bouton Définir une alarme
 setAlarmBtn.addEventListener("click", setAlarm);
-
-// Initialisation de l'affichage des alarmes au chargement
 renderAlarms();
