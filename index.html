@@ -5,24 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Oclock</title>
     <link rel="stylesheet" href="style.css" />
-    <!-- Load an icon library -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <script src="./script.js" defer></script>
   </head>
-  <body onload="startTime()">
+  <body>
     <div id="clockdate">
       <div class="clockdate-wrapper">
         <div id="clock"></div>
         <div id="date"></div>
       </div>
     </div>
-    <div class="btn">
-      <div class="flex">
-        <button><i class="fa fa-bell"></i> Définir une alarme</button>
-        <button><i class="fa fa-clock-o"></i> Lancer le chrono</button>
+    <div class="flex">
+      <div class="btn">
+        <div id="stopwatch-container">
+          <h2><u>Chronomètre</u></h2>
+          <div id="stopwatch-display">00:00:00</div>
+        </div>
+
+        <div id="alarms-list-container">
+          <h2><u>Alarmes Définies</u></h2>
+          <ul id="alarms-list"></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex">
+      <div class="btn">
+        <button id="set-alarm-btn">
+          <i class="fa fa-bell"></i> Définir une alarme
+        </button>
+        <button id="toggle-stopwatch-btn">
+          <i class="fa fa-clock-o"></i> Lancer le chrono
+        </button>
+        <button id="reset-stopwatch-btn">
+          <i class="fa fa-undo"></i> Reset chrono
+        </button>
       </div>
     </div>
   </body>

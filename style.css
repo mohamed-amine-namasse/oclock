@@ -3,8 +3,11 @@ body {
 }
 
 #clockdate {
-  margin-top: 200px;
+  /* Conserve la marge supérieure */
+  margin-top: 100px;
+  margin-bottom: 20px; /* Ajout d'une petite marge en bas pour séparer le chrono */
 }
+
 .clockdate-wrapper {
   background-color: #333;
   padding: 25px;
@@ -37,25 +40,95 @@ body {
   color: #fff;
 }
 
-.btn {
+/* --- NOUVEAUX STYLES --- */
+
+#stopwatch-container,
+#alarms-list-container {
+  /* Style similaire au clockdate-wrapper pour l'harmonie */
+  background-color: #333;
+  color: white;
+  padding: 15px 25px;
+  max-width: 350px;
+  width: 100%;
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ajout d'une ombre */
+}
+
+#stopwatch-container h2,
+#alarms-list-container h2 {
+  margin-top: 0;
+  font-size: 1.2em;
+  color: goldenrod; /* Rappel de la couleur de fond */
+}
+
+#stopwatch-display {
+  font-size: 3em;
+  font-weight: bold;
+  color: #fff;
+  margin: 10px 0;
+}
+
+/* --- STYLES DES BOUTONS ET ALARMES --- */
+
+.flex {
   display: flex;
   justify-content: center;
   margin-top: 5px;
 }
-.flex {
+.btn {
   display: flex;
   gap: 12px;
+  margin-bottom: 20px; /* Ajout d'une marge en bas des boutons */
 }
+/* Style général des boutons conservé */
 button {
-  background-color: black;
+  background-color: seagreen;
   color: white;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  padding: 4px;
+  padding: 8px 12px; /* Rendre le padding plus généreux */
   border: none;
   cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.2s, color 0.2s;
+  font-size: 0.9em;
 }
 
 button:hover {
-  background-color: rgb(205, 205, 205);
-  color: red;
+  background-color: rgb(104, 196, 144);
+}
+
+/* Liste des alarmes */
+#alarms-list {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+#alarms-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dashed #777; /* Ligne de séparation légère */
+  font-size: 1em;
+}
+
+#alarms-list li:last-child {
+  border-bottom: none;
+}
+
+/* Style spécifique du bouton Supprimer */
+#alarms-list li button.delete-alarm-btn {
+  background-color: #dc3545; /* Rouge pour l'action de suppression */
+  color: white;
+  padding: 3px 8px;
+  font-size: 0.75em;
+  border-radius: 3px;
+}
+
+#alarms-list li button.delete-alarm-btn:hover {
+  background-color: #c82333;
+  color: white;
 }
